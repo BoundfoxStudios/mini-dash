@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game/Scenes/MainMenu.unity
     guid: eab729c7b396a41488ddf078d0bdb3bd
+  - enabled: 1
+    path: Assets/_Game/Scenes/Music Player.unity
+    guid: 6b630a842ff6944ff86dfb4ddd57063f
   m_configObjects: {}
