@@ -1,4 +1,6 @@
 using System;
+using BoundfoxStudios.MiniDash.Collectables;
+using BoundfoxStudios.MiniDash.Events.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -34,7 +36,7 @@ namespace BoundfoxStudios.MiniDash.Player
     public Transform GroundCheck;
     public float GroundRadius = 0.1f;
     public LayerMask GroundMask;
-
+    
     private bool _isFacingLeft = true;
     private DashDirection _dashDirection;
     private float _gravityScale;
@@ -90,6 +92,11 @@ namespace BoundfoxStudios.MiniDash.Player
       groundControls.JumpDash.performed -= JumpDashPerformed;
 
       groundControls.Disable();
+    }
+
+    public void OnLevelCompleted()
+    {
+      Controls.PlayerGround.Disable();
     }
 
     private void StartDash(DashDirection direction)
@@ -179,6 +186,19 @@ namespace BoundfoxStudios.MiniDash.Player
     private void LeftRightPerformed(InputAction.CallbackContext context)
     {
       _horizontalMovement = context.ReadValue<float>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+      if (other.CompareTag("Collectable"))
+      {
+        var collectable = other.GetComponent<Collectable>();
+
+        if (collectable)
+        {
+          collectable.Collect();
+        }
+      }
     }
 
     private void OnCollisionStay2D(Collision2D other)

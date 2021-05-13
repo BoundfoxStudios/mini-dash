@@ -17,4 +17,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game/Scenes/Scene Loader.unity
     guid: 48ccf8cda964e4c4a96d5f353d71149f
+  - enabled: 1
+    path: Assets/_Game/Scenes/Game Managers.unity
+    guid: fe1f40731a9df4a9db3888e4adaa7d2c
+  - enabled: 1
+    path: Assets/_Game/Scenes/InGameUI.unity
+    guid: 3a9785f02b297492e9bec7126423f16e
+  - enabled: 1
+    path: Assets/_Game/Scenes/LevelSelection.unity
+    guid: 84b31f05c3f5d494c95e91ee65e77a0b
   m_configObjects: {}

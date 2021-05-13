@@ -9,27 +9,28 @@ namespace BoundfoxStudios.MiniDash.SceneManagement
 {
   public class SceneLoader : MonoBehaviour
   {
-    private PersistentSceneLoader _persistentSceneLoader;
-
-    private void Awake()
-    {
-      _persistentSceneLoader = FindObjectOfType<PersistentSceneLoader>();
-    }
-
     public void ChangeScene(string sceneName)
     {
+      var persistentSceneLoader = FindObjectOfType<PersistentSceneLoader>();
+
+      if (!persistentSceneLoader)
+      {
+        Debug.LogError("No persistent scene loader found!");
+        return;
+      }
+
       var list = new List<AsyncOperation>();
-      
+
       for (var i = SceneManager.sceneCount - 1; i >= 0; i--)
       {
         var scene = SceneManager.GetSceneAt(i);
-        
-        if (_persistentSceneLoader.ScenesNamesToLoad.Contains(scene.name))
-        {
-          continue;
-        }
 
-        list.Add(SceneManager.UnloadSceneAsync(scene));
+        var sceneDefinition = persistentSceneLoader.SceneDefinitionSOs.SingleOrDefault(definition => definition.SceneName.Contains(scene.name));
+
+        if (sceneDefinition == null || !sceneDefinition.PersistBetweenSceneSwitch)
+        {
+          list.Add(SceneManager.UnloadSceneAsync(scene));
+        }
       }
 
       StartCoroutine(LoadAfterAsyncOperationCompletion(list, sceneName));

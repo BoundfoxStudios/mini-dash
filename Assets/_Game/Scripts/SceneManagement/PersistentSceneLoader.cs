@@ -1,3 +1,4 @@
+using BoundfoxStudios.MiniDash.SceneManagement.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,7 +6,7 @@ namespace BoundfoxStudios.MiniDash.SceneManagement
 {
   public class PersistentSceneLoader : MonoBehaviour
   {
-    public string[] ScenesNamesToLoad;
+    public SceneDefinitionSO[] SceneDefinitionSOs;
 
     private void Start()
     {
@@ -14,11 +15,11 @@ namespace BoundfoxStudios.MiniDash.SceneManagement
 
     private void LoadScenes()
     {
-      foreach (var scene in ScenesNamesToLoad)
+      foreach (var sceneDefinition in SceneDefinitionSOs)
       {
-        if (!SceneManager.GetSceneByName(scene).isLoaded)
+        if (!SceneManager.GetSceneByName(sceneDefinition.SceneName).isLoaded)
         {
-          SceneManager.LoadScene(scene, LoadSceneMode.Additive);
+          SceneManager.LoadScene(sceneDefinition.SceneName, LoadSceneMode.Additive);
         }
       }
     }

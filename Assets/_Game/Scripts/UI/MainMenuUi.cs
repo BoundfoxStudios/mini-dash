@@ -9,5 +9,10 @@ namespace BoundfoxStudios.MiniDash.UI
     {
       FindObjectOfType<SceneLoader>().ChangeScene("About");
     }
+
+    public void GoToLevelSelection()
+    {
+      FindObjectOfType<SceneLoader>().ChangeScene("LevelSelection");
+    }
   }
 }
