@@ -102,7 +102,7 @@ namespace BoundfoxStudios.MiniDash.Player
 
     public void OnLevelCompleted()
     {
-      Controls.PlayerGround.Disable();
+      Destroy(gameObject);
     }
 
     private void StartDash(DashDirection direction)
