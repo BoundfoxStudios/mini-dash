@@ -22,6 +22,8 @@ namespace BoundfoxStudios.MiniDash.Player
 
     public Rigidbody2D Rigidbody;
     public SpriteRenderer SpriteRenderer;
+    public BoxCollider2D StandingCollider;
+    public BoxCollider2D DashingCollider;
 
     [Header("Configuration")]
     public float MovementSpeed = 1;
@@ -56,6 +58,7 @@ namespace BoundfoxStudios.MiniDash.Player
 
     private void Awake()
     {
+      DashingCollider.enabled = false;
       Controls = new GameControls();
     }
 
@@ -104,6 +107,8 @@ namespace BoundfoxStudios.MiniDash.Player
 
     private void StartDash(DashDirection direction)
     {
+      StandingCollider.enabled = false;
+      DashingCollider.enabled = true;
       _dashDirection = direction;
       _waitForBeingOnGroundBeforeNextMovement = true;
 
@@ -118,6 +123,8 @@ namespace BoundfoxStudios.MiniDash.Player
         return;
       }
 
+      DashingCollider.enabled = false;
+      StandingCollider.enabled = true;
       Rigidbody.gravityScale = _gravityScale;
       _dashDirection = DashDirection.None;
       _horizontalMovement = 0;
