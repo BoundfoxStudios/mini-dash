@@ -602,7 +602,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8652880121886408818, guid: 89d3ab8abe41a49409fa3fffead27b5c, type: 3}
       propertyPath: m_text
-      value: As soon as you have collected all green coins, you win the level
+      value: 'As soon as you have collected all green coins, you win the level
+
+
+        Press
+        R at any time to restart the level'
       objectReference: {fileID: 0}
     - target: {fileID: 8652880121886408818, guid: 89d3ab8abe41a49409fa3fffead27b5c, type: 3}
       propertyPath: m_fontSize

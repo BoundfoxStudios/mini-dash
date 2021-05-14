@@ -112,6 +112,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "LevelManager",
+            "id": "b7f6bdb5-cfc0-46ce-9601-c71b81710083",
+            "actions": [
+                {
+                    "name": "Restart Level",
+                    "type": "Button",
+                    "id": "36373865-a576-4d58-9d3a-e8957b91c725",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0235d7c0-ebbd-4560-b4d3-5dd97310e3cb",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart Level",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

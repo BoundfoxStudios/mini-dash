@@ -1,6 +1,9 @@
+using System;
 using BoundfoxStudios.MiniDash.Levels.ScriptableObjects;
+using BoundfoxStudios.MiniDash.Player;
 using BoundfoxStudios.MiniDash.SceneManagement;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace BoundfoxStudios.MiniDash.Levels
 {
@@ -8,11 +11,31 @@ namespace BoundfoxStudios.MiniDash.Levels
   {
     public LevelsSO LevelsSO;
     public LevelRuntimeDataSO LevelRuntimeDataSO;
-    public AudioSource LevelCompletedAudio;
 
-    public void PlayLevelCompletedAudio()
+    private GameControls _controls;
+
+    private void Awake()
     {
-      LevelCompletedAudio.Play();
+      _controls = new GameControls();
+    }
+
+    private void OnEnable()
+    {
+      _controls.LevelManager.RestartLevel.performed += RestartLevelPerformed;
+      
+      _controls.LevelManager.Enable();
+    }
+
+    private void OnDisable()
+    {
+      _controls.LevelManager.RestartLevel.performed -= RestartLevelPerformed;
+      
+      _controls.LevelManager.Disable();
+    }
+
+    private void RestartLevelPerformed(InputAction.CallbackContext _)
+    {
+      RestartLevel();
     }
 
     public bool HasNextLevel()

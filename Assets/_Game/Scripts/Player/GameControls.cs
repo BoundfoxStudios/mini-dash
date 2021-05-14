@@ -127,6 +127,33 @@ namespace BoundfoxStudios.MiniDash.Player
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""LevelManager"",
+            ""id"": ""b7f6bdb5-cfc0-46ce-9601-c71b81710083"",
+            ""actions"": [
+                {
+                    ""name"": ""Restart Level"",
+                    ""type"": ""Button"",
+                    ""id"": ""36373865-a576-4d58-9d3a-e8957b91c725"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""0235d7c0-ebbd-4560-b4d3-5dd97310e3cb"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart Level"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -147,6 +174,9 @@ namespace BoundfoxStudios.MiniDash.Player
             m_PlayerGround = asset.FindActionMap("Player Ground", throwIfNotFound: true);
             m_PlayerGround_LeftRight = m_PlayerGround.FindAction("Left/Right", throwIfNotFound: true);
             m_PlayerGround_JumpDash = m_PlayerGround.FindAction("Jump/Dash", throwIfNotFound: true);
+            // LevelManager
+            m_LevelManager = asset.FindActionMap("LevelManager", throwIfNotFound: true);
+            m_LevelManager_RestartLevel = m_LevelManager.FindAction("Restart Level", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -233,6 +263,39 @@ namespace BoundfoxStudios.MiniDash.Player
             }
         }
         public PlayerGroundActions @PlayerGround => new PlayerGroundActions(this);
+
+        // LevelManager
+        private readonly InputActionMap m_LevelManager;
+        private ILevelManagerActions m_LevelManagerActionsCallbackInterface;
+        private readonly InputAction m_LevelManager_RestartLevel;
+        public struct LevelManagerActions
+        {
+            private @GameControls m_Wrapper;
+            public LevelManagerActions(@GameControls wrapper) { m_Wrapper = wrapper; }
+            public InputAction @RestartLevel => m_Wrapper.m_LevelManager_RestartLevel;
+            public InputActionMap Get() { return m_Wrapper.m_LevelManager; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(LevelManagerActions set) { return set.Get(); }
+            public void SetCallbacks(ILevelManagerActions instance)
+            {
+                if (m_Wrapper.m_LevelManagerActionsCallbackInterface != null)
+                {
+                    @RestartLevel.started -= m_Wrapper.m_LevelManagerActionsCallbackInterface.OnRestartLevel;
+                    @RestartLevel.performed -= m_Wrapper.m_LevelManagerActionsCallbackInterface.OnRestartLevel;
+                    @RestartLevel.canceled -= m_Wrapper.m_LevelManagerActionsCallbackInterface.OnRestartLevel;
+                }
+                m_Wrapper.m_LevelManagerActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @RestartLevel.started += instance.OnRestartLevel;
+                    @RestartLevel.performed += instance.OnRestartLevel;
+                    @RestartLevel.canceled += instance.OnRestartLevel;
+                }
+            }
+        }
+        public LevelManagerActions @LevelManager => new LevelManagerActions(this);
         private int m_KeyboardSchemeIndex = -1;
         public InputControlScheme KeyboardScheme
         {
@@ -246,6 +309,10 @@ namespace BoundfoxStudios.MiniDash.Player
         {
             void OnLeftRight(InputAction.CallbackContext context);
             void OnJumpDash(InputAction.CallbackContext context);
+        }
+        public interface ILevelManagerActions
+        {
+            void OnRestartLevel(InputAction.CallbackContext context);
         }
     }
 }
