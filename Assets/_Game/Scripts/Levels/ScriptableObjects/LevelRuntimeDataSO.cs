@@ -9,10 +9,11 @@ namespace BoundfoxStudios.MiniDash.Levels.ScriptableObjects
   public class LevelRuntimeDataSO : ScriptableObject
   {
     private int _points;
-    private IList<GameObject> _necessaryCollectablesForLevelCompletion = new Collection<GameObject>();
-    
+    private readonly IList<GameObject> _necessaryCollectablesForLevelCompletion = new Collection<GameObject>();
+
     public IntEventSO PointsEventChangedSO;
     public IntEventSO LevelCompletedEventSO;
+    public int LevelIndex;
 
     public int Points
     {
@@ -32,7 +33,7 @@ namespace BoundfoxStudios.MiniDash.Levels.ScriptableObjects
     public void RemoveCollectableForLevelCompletion(GameObject collectable)
     {
       _necessaryCollectablesForLevelCompletion.Remove(collectable);
-      
+
       if (_necessaryCollectablesForLevelCompletion.Count == 0)
       {
         LevelCompletedEventSO.RaiseEvent(_points);
@@ -41,9 +42,13 @@ namespace BoundfoxStudios.MiniDash.Levels.ScriptableObjects
 
     private void OnDisable()
     {
+      Clean();
+    }
+
+    public void Clean()
+    {
       _points = 0;
       _necessaryCollectablesForLevelCompletion.Clear();
-      Debug.Log("Disabling LevelRuntimeData");
     }
   }
 }

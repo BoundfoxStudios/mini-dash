@@ -36,6 +36,9 @@ namespace BoundfoxStudios.MiniDash.Player
     public Transform GroundCheck;
     public float GroundRadius = 0.1f;
     public LayerMask GroundMask;
+
+    [Header("Events")]
+    public VoidEventSO PlayerDiedEventSO;
     
     private bool _isFacingLeft = true;
     private DashDirection _dashDirection;
@@ -117,6 +120,7 @@ namespace BoundfoxStudios.MiniDash.Player
 
       Rigidbody.gravityScale = _gravityScale;
       _dashDirection = DashDirection.None;
+      _horizontalMovement = 0;
     }
 
     private void FixedUpdate()
@@ -207,6 +211,12 @@ namespace BoundfoxStudios.MiniDash.Player
       {
         StopDash();
       }
+    }
+    
+    public void OnPlayerOutsideOfCamera()
+    {
+      Destroy(gameObject);
+      PlayerDiedEventSO.RaiseEvent();
     }
   }
 }

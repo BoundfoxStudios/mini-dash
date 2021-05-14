@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6847685417877784359}
   - component: {fileID: 6847685417877784358}
+  - component: {fileID: 7207988846172149859}
   m_Layer: 0
   m_Name: GFX
   m_TagString: Untagged
@@ -112,6 +113,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7207988846172149859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6847685417877784356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f2252c951f4d67a7d583b119c9d292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BecameInvisible:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1740545488017765012}
+        m_TargetAssemblyTypeName: BoundfoxStudios.MiniDash.Player.PlayerCharacter,
+          BoundfoxStudios.MiniDash
+        m_MethodName: OnPlayerOutsideOfCamera
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6847685417950016971
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,6 +268,7 @@ MonoBehaviour:
   GroundMask:
     serializedVersion: 2
     m_Bits: 256
+  PlayerDiedEventSO: {fileID: 11400000, guid: d6bc1e7c4dc2147c5b9d69a8c6e37d34, type: 2}
 --- !u!114 &6748876275968527297
 MonoBehaviour:
   m_ObjectHideFlags: 0
