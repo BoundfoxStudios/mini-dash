@@ -72,6 +72,7 @@ namespace BoundfoxStudios.MiniDash.UI
 
     public void RestartLevel()
     {
+      Time.timeScale = 1;
       FindObjectOfType<LevelManager>().RestartLevel();
     }
 
