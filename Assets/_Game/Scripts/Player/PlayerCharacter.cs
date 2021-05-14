@@ -41,7 +41,8 @@ namespace BoundfoxStudios.MiniDash.Player
 
     [Header("Events")]
     public VoidEventSO PlayerDiedEventSO;
-    
+
+    private bool _isLevelCompleted;
     private bool _isFacingLeft = true;
     private DashDirection _dashDirection;
     private float _gravityScale;
@@ -102,6 +103,7 @@ namespace BoundfoxStudios.MiniDash.Player
 
     public void OnLevelCompleted()
     {
+      _isLevelCompleted = true;
       Destroy(gameObject);
     }
 
@@ -219,11 +221,14 @@ namespace BoundfoxStudios.MiniDash.Player
         StopDash();
       }
     }
-    
+
     public void OnPlayerOutsideOfCamera()
     {
-      Destroy(gameObject);
-      PlayerDiedEventSO.RaiseEvent();
+      if (!_isLevelCompleted)
+      {
+        Destroy(gameObject);
+        PlayerDiedEventSO.RaiseEvent();
+      }
     }
   }
 }

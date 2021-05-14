@@ -1,6 +1,4 @@
-using System;
 using BoundfoxStudios.MiniDash.Levels;
-using BoundfoxStudios.MiniDash.Levels.ScriptableObjects;
 using BoundfoxStudios.MiniDash.SceneManagement;
 using TMPro;
 using UnityEngine;
@@ -9,7 +7,6 @@ namespace BoundfoxStudios.MiniDash.UI
 {
   public class InGameUi : MonoBehaviour
   {
-    public LevelRuntimeDataSO LevelRuntimeDataSO;
     public GameObject GameOverUi;
     public GameObject PauseButton;
     public GameObject PlayerUi;
