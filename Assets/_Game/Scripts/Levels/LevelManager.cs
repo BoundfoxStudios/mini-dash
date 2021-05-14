@@ -8,6 +8,12 @@ namespace BoundfoxStudios.MiniDash.Levels
   {
     public LevelsSO LevelsSO;
     public LevelRuntimeDataSO LevelRuntimeDataSO;
+    public AudioSource LevelCompletedAudio;
+
+    public void PlayLevelCompletedAudio()
+    {
+      LevelCompletedAudio.Play();
+    }
 
     public bool HasNextLevel()
     {

@@ -1,4 +1,3 @@
-using System;
 using BoundfoxStudios.MiniDash.Events.ScriptableObjects;
 using BoundfoxStudios.MiniDash.Levels.ScriptableObjects;
 using UnityEngine;
@@ -11,6 +10,7 @@ namespace BoundfoxStudios.MiniDash.Collectables
     public bool IsNecessaryForLevelCompletion;
     public LevelRuntimeDataSO LevelRuntimeDataSO;
     public IntEventSO CollectableCollectedEventSO;
+    public AudioSource CollectableAudio;
 
     private void Awake()
     {
@@ -22,6 +22,7 @@ namespace BoundfoxStudios.MiniDash.Collectables
 
     public void Collect()
     {
+      CollectableAudio.Play();
       CollectableCollectedEventSO.RaiseEvent(Points);
 
       if (IsNecessaryForLevelCompletion)
