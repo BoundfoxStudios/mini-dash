@@ -9,8 +9,17 @@ namespace BoundfoxStudios.MiniDash.SceneManagement
 {
   public class SceneLoader : MonoBehaviour
   {
+    public GameObject LoadingCurtain;
+
+    private void Awake()
+    {
+      LoadingCurtain.SetActive(false);
+    }
+
     public void ChangeScene(string sceneName)
     {
+      LoadingCurtain.SetActive(true);
+      
       var persistentSceneLoader = FindObjectOfType<PersistentSceneLoader>();
 
       if (!persistentSceneLoader)
@@ -41,6 +50,8 @@ namespace BoundfoxStudios.MiniDash.SceneManagement
       yield return new WaitUntil(() => list.All(operation => operation.isDone));
 
       SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+      
+      LoadingCurtain.SetActive(false);
     }
   }
 }
